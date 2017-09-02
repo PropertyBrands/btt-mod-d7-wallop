@@ -4,7 +4,9 @@ It just provides a theme function and mechanism for including the Wallop slidesh
 
 Usage:
 
-`$render = array(
+```php
+<?php
+$render = array(
   '#theme' => 'wallop_slideshow',
   '#slides' => array(
     'This is a string',
@@ -15,4 +17,4 @@ Usage:
   ),
 );
 
-print drupal_render($render);`
+print drupal_render($render);```
