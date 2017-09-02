@@ -56,3 +56,33 @@
   visibility: visible;
   position: relative;
 }
+
+/*
+  Custom control styles - this is Wallop drupal module specific.
+ */
+.Wallop-control {
+  position:absolute;
+  top:50%;
+  z-index:1000;
+  border: solid rgba(50,50,50,0.85);
+  border-width: 0 10px 10px 0;
+  display: inline-block;
+  padding: 10px;
+  opacity:0.85;
+  transition:all .25s;
+}
+
+.Wallop-control:hover {
+  border-color:rgba(100,100,100,1);
+  cursor:pointer;
+}
+
+.Wallop-buttonPrevious {
+  transform: rotate(135deg);
+  left:20px;
+}
+
+.Wallop-buttonNext {
+  right:20px;
+  transform: rotate(-45deg);
+}

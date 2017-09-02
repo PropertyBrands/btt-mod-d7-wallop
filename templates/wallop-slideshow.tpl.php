@@ -30,8 +30,8 @@
     <?php endforeach; ?>
   </div>
   <?php if($show_controls) : ?>
-    <button class="Wallop-buttonPrevious">Previous</button>
-    <button class="Wallop-buttonNext">Next</button>
+    <span class="Wallop-buttonPrevious Wallop-control"></span>
+    <span class="Wallop-buttonNext Wallop-control"></span>
   <?php endif; ?>
 </div>
 <script type="text/javascript">
