@@ -4,7 +4,7 @@
  * either a string of content to be printed - or a renderable array
  * which will be `rendered` and then printed.
  *
- * @var $attributes - an array of attributes including classes. Implement
+ * @var $attributes_array - an array of attributes including classes. Implement
  * hook_preprocess_HOOK() to and change this to do things like adding custom
  * animations.
  *
@@ -16,7 +16,8 @@
  * @var $settings - JSON encoded slideshow settings.
  */
 ?>
-<div id="<?php print $id; ?>" class="<?php print drupal_attributes($attributes) ?>">
+<div id="<?php print $id; ?>"
+     <?php print drupal_attributes($attributes_array) ?>>
   <div class="Wallop-list">
     <?php foreach($slides as $slide) : ?>
       <div class="Wallop-item">
@@ -33,3 +34,6 @@
     <button class="Wallop-buttonNext">Next</button>
   <?php endif; ?>
 </div>
+<script type="text/javascript">
+    new Wallop(document.querySelector('<?php print "#$id" ?>'));
+</script>

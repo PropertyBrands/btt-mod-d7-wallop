@@ -13,7 +13,7 @@ function wallop_theme() {
         // An array of items - each of which will be a string or render array
         'slides' => array(),
         // Run through drupal_attributes().
-        'attributes' => array(
+        'attributes_array' => array(
           'class' => array(
             'Wallop',
             'Wallop--fade',
@@ -53,7 +53,7 @@ function wallop_preprocess_wallop_slideshow(&$variables) {
 
   if(!empty($variables['animation'])) {
     foreach($variables['animation'] as $css_file) {
-      drupal_add_css($css_file);
+      drupal_add_css($css_file, array('type' => 'file'));
     }
   }
 }
@@ -98,14 +98,14 @@ function wallop_read_core_assets() {
       'asset' => file_get_contents($js_path),
       'path' => $js_path,
       'args' => array(
-        'inline' => TRUE,
+        'type' => 'inline',
       ),
     ),
     'css' => array(
       'asset' => file_get_contents($css_path),
       'path' => $css_path,
       'args' => array(
-        'inline' => TRUE,
+        'type' => 'inline',
       ),
     ),
   );
