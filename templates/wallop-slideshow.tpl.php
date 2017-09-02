@@ -8,7 +8,7 @@
  * hook_preprocess_HOOK() to and change this to do things like adding custom
  * animations.
  *
- * @var $id - an id for the slideshow calculated in
+ * @var $slideshow_id - an id for the slideshow calculated in
  * wallop_preprocess_wallop_slideshow().
  *
  * @var $show_controls - boolean flag indicating whether to show prev/next
@@ -16,7 +16,7 @@
  * @var $settings - JSON encoded slideshow settings.
  */
 ?>
-<div id="<?php print $id; ?>"
+<div id="<?php print $slideshow_id; ?>"
      <?php print drupal_attributes($attributes_array) ?>>
   <div class="Wallop-list">
     <?php foreach($slides as $slide) : ?>
@@ -35,5 +35,11 @@
   <?php endif; ?>
 </div>
 <script type="text/javascript">
-    new Wallop(document.querySelector('<?php print "#$id" ?>'));
+  (function() {
+    var settings = JSON.parse('<?php print drupal_json_encode($settings); ?>');
+    new Wallop(
+      document.querySelector('<?php print "#$slideshow_id" ?>'),
+      settings
+    );
+  })();
 </script>

@@ -8,7 +8,7 @@ function wallop_theme() {
   return array(
     'wallop_slideshow' => array(
       'template' => 'templates/wallop-slideshow',
-      'id' => NULL,
+      'slideshow_id' => NULL,
       'variables' => array(
         // An array of items - each of which will be a string or render array
         'slides' => array(),
@@ -49,8 +49,8 @@ function wallop_theme() {
 function wallop_preprocess_wallop_slideshow(&$variables) {
   wallop_add_core_assets();
 
-  if(empty($variables['id'])) {
-    $variables['id'] = drupal_html_id('wallop-slideshow');
+  if(empty($variables['slideshow_id'])) {
+    $variables['slideshow_id'] = drupal_html_id('wallop-slideshow');
   }
 
   if(!empty($variables['animation'])) {
