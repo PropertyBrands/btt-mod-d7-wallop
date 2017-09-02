@@ -14,17 +14,24 @@
  * @var $show_controls - boolean flag indicating whether to show prev/next
  *
  * @var $settings - JSON encoded slideshow settings.
+ *
+ * @var $not_first - local variable to add the `current` class as recommended
+ * by wallop.
  */
 ?>
 <div id="<?php print $slideshow_id; ?>"
      <?php print drupal_attributes($attributes_array) ?>>
   <div class="Wallop-list">
     <?php foreach($slides as $slide) : ?>
-      <div class="Wallop-item">
+      <div class="<?php !isset($not_first)
+        ? print 'Wallop-item Wallop-item--current'
+        : print 'Wallop-item'; ?>"
+      >
         <?php
-        is_array($slide)
-          ? print drupal_render($slide)
-          : print $slide;
+          is_array($slide)
+            ? print drupal_render($slide)
+            : print $slide;
+          $not_first = TRUE;
         ?>
       </div>
     <?php endforeach; ?>
