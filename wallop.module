@@ -49,7 +49,9 @@ function wallop_theme() {
 function wallop_preprocess_wallop_slideshow(&$variables) {
   wallop_add_core_assets();
 
-  $variables['id'] = drupal_html_id('wallop-slideshow');
+  if(empty($variables['id'])) {
+    $variables['id'] = drupal_html_id('wallop-slideshow');
+  }
 
   if(!empty($variables['animation'])) {
     foreach($variables['animation'] as $css_file) {
