@@ -101,6 +101,7 @@ function wallop_read_core_assets() {
       'path' => $js_path,
       'args' => array(
         'type' => 'inline',
+        'scope' => 'header',
       ),
     ),
     'css' => array(
