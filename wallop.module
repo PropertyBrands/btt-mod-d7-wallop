@@ -109,6 +109,8 @@ function wallop_read_core_assets() {
       'path' => $css_path,
       'args' => array(
         'type' => 'inline',
+        'weight' => -99999,
+        'group' => CSS_SYSTEM
       ),
     ),
   );

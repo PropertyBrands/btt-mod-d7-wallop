@@ -46,6 +46,13 @@
   width: 100%;
 }
 
+.Wallop-item img {
+  width:100%;
+  max-width:100%;
+  height:auto;
+}
+
+
 /*
   This is the current item element
 
