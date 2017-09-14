@@ -52,7 +52,6 @@
   height:auto;
 }
 
-
 /*
   This is the current item element
 
@@ -71,13 +70,39 @@
   position:absolute;
   top:50%;
   z-index:1000;
-  border: solid rgba(50,50,50,0.85);
-  border-width: 0 10px 10px 0;
   display: inline-block;
-  padding: 10px;
-  opacity:0.85;
+  opacity:0;
   transition:all .25s;
 }
+
+.Wallop:hover .Wallop-control {
+  opacity:0.5;
+}
+
+.Wallop-control::before,
+.Wallop-control::after {
+  content:'';
+  position:absolute;
+  z-index:999;
+  display:block;
+}
+
+.Wallop-control::before {
+  left:-5px;
+  top:-5px;
+  width:35px;
+  height:35px;
+  background-color:black;
+  transform:rotate(45deg);
+}
+
+.Wallop-control::after {
+  border: solid #FFF;
+  border-width: 0 2px 2px 0;
+  padding: 8px;
+  z-index:1001;
+}
+
 
 .Wallop-control:hover {
   border-color:rgba(100,100,100,1);
@@ -86,10 +111,10 @@
 
 .Wallop-buttonPrevious {
   transform: rotate(135deg);
-  left:20px;
+  left:45px;
 }
 
 .Wallop-buttonNext {
-  right:20px;
+  right:45px;
   transform: rotate(-45deg);
 }
