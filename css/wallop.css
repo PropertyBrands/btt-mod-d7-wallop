@@ -58,7 +58,7 @@
   All we do here, is make it visible again reset
   the position to static. Could also be relative
  */
-.Wallop-item--current {
+.Wallop-list .Wallop-item--current {
   visibility: visible;
   position: relative;
 }
