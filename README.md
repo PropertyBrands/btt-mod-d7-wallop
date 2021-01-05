@@ -19,3 +19,9 @@ $render = array(
 
 print drupal_render($render);
 ```
+
+Installation of Submodule:
+
+```
+git submodule add -b 7.x-1.x-dev --name sites/all/modules/bluetent/wallop git@github.com:PropertyBrands/btt-mod-d7-wallop.git sites/all/modules/bluetent/wallop
+```
