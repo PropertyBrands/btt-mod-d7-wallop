@@ -7,7 +7,6 @@
             var $slider = '#' + id,
               $slider_settings = settings.wallop.instances[id].settings;
             if (!$($slider).hasClass('wallop-processed')) {
-              console.log('wallop instance: ' + $slider);
               new Wallop(
                 document.querySelector($slider),
                 $slider_settings
