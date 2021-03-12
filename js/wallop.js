@@ -17,15 +17,16 @@
               $slider_settings = settings.wallop.instances[id].settings,
               $slider,
               $slideshow,
-              $autoPlayMs = $slider_settings.autoPlayMs || 4500;
+              $autoPlayMs = 1000; //$slider_settings.autoPlayMs || 4500;
             
+            var el;
+
             $slider = document.querySelector($slider_id);
 
             $slideshow = new Wallop(
               $slider,
               $slider_settings
             );
-
             
             $($slider).addClass('wallop-processed');
 
@@ -34,49 +35,47 @@
               // Fallback behavior will be to display the first slide. Slideshows won't work, however.
               return;
             }
-            wallop_slideshows.push($slideshow);
+            wallop_slideshows[id] = $slideshow;
           }
 
-          var loadNext = function (current_slideshow) {
-            console.log(current_slideshow);
-            var nextIndex = (current_slideshow.currentItemIndex + 1) % current_slideshow.allItemsArray.length;
-            current_slideshow.goTo(nextIndex);
-          };
-
-          var nextTimeout;
-
           console.log(wallop_slideshows);
-          wallop_slideshows.forEach(function(current_slideshow) {
-            // Auto-run without requiring user change or mouseenter/mouseleave.
-            setTimeout(function () {
-              loadNext(current_slideshow);
+          for (var slide_id in wallop_slideshows) {
+            var current_slideshow = wallop_slideshows[slide_id],
+              next_timeout_key = "next_timeout_" + slide_id,
+              loadNext = function (autoplay = false) {
+                var nextIndex = (current_slideshow.currentItemIndex + 1) % current_slideshow.allItemsArray.length;
+                slideshow.goTo(nextIndex);
+              };
+
+            if(window[next_timeout_key]) {
+              continue;
+            }
+            window[next_timeout_key] = setTimeout(function () {
+              loadNext(true);
             }, $autoPlayMs);
-
-
-            var el = document.querySelector(current_slideshow.$selector);
-
+          
+            var el_id = '#' + slide_id;
+            console.log(el_id);
             // Wallop specific settings.
-            el.on('change', function () {
-              if(nextTimeout) {
-                clearTimeout(nextTimeout);
+            $(el_id).on('change', function () {
+              if(window[next_timeout_key]) {
+                clearTimeout(window[next_timeout_key]);
               }
-              console.log(this);
-              nextTimeout = setTimeout(function () {
-                loadNext(current_slideshow);
+              window[next_timeout_key] = nextTimeout = setTimeout(function () {
+                loadNext();
               }, $autoPlayMs);
             });
-            el.on('mouseenter', function () {
-              if(nextTimeout) {
-                clearTimeout(nextTimeout);
+            $(el_id).on('mouseenter', function () {
+              if(window[next_timeout_key]) {
+                clearTimeout(window[next_timeout_key]);
               }
             });
-            el.on('mouseleave', function () {
-              console.log(current_slideshow);
-              nextTimeout = setTimeout(function () {
-                loadNext(current_slideshow);
-              }, $autoPlayMs);
+            $(el_id).on('mouseleave', function () {
+              window[next_timeout_key] = setTimeout(function () {
+                loadNext(true);
+              }, autoPlayMs);
             });
-          });
+          }
         }
       }
     },
