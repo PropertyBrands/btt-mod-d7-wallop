@@ -31,6 +31,7 @@ function wallop_theme() {
           'hidePreviousClass' => 'Wallop-item--hidePrevious',
           'hideNextClass' => 'Wallop-item--hideNext',
           'carousel' => TRUE,
+          'autoPlayMs' => 4500,
         ),
         'show_controls' => TRUE,
         'animation' => 'fade',
@@ -79,3 +80,4 @@ function wallop_add_core_assets() {
 
   $added = TRUE;
 }
+

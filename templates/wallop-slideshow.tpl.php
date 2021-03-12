@@ -22,7 +22,9 @@
  */
 ?>
 <div id="<?php print $slideshow_id; ?>" <?php print drupal_attributes($attributes_array) ?>>
-  <?php if ($header): ?><h4 class="block-title"><?php print $header; ?></h4><?php endif; ?>
+  <?php if ($header): ?>
+    <h4 class="block-title"><?php print $header; ?></h4>
+  <?php endif; ?>
   <div class="Wallop-list">
     <?php foreach($slides as $slide) : ?>
       <div class="<?php !isset($not_first)
