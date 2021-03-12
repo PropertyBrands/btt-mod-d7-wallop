@@ -2,6 +2,10 @@
   Drupal.behaviors.wallop = {
     attach: function (context, settings) {
       var wallop_has_processed = document.querySelectorAll('.wallop-processed');
+      var loadNext = function (currentSlideShow, autoplay = false) {
+        var nextIndex = (currentSlideShow.currentItemIndex + 1) % currentSlideShow.allItemsArray.length;
+        currentSlideShow.goTo(nextIndex);
+      };
       if(wallop_has_processed.length) {
         console.log("Bail out since we already processed our Wallop slides.");
         return;
@@ -30,50 +34,36 @@
             
             $($slider).addClass('wallop-processed');
 
-            if(!$slideshow) {
-              // For some reason Wallop's slideshow is not there. Bail out to avoid a JS error.
-              // Fallback behavior will be to display the first slide. Slideshows won't work, however.
-              return;
-            }
-            wallop_slideshows[id] = $slideshow;
+            wallop_slideshows[id] = {
+              slideshow: $slideshow,
+            };
+            wallop_slideshows[id].loadNext = function(currentId, autoplay = false) {
+              var current_slideshow = wallop_slideshows[currentId].slideshow;
+              loadNext(current_slideshow, autoplay);
+            };
+            wallop_slideshows[id].nextTimeout = function(currentId) {
+              console.log(currentId);
+              return setTimeout(function () {
+                var current_slideshow = wallop_slideshows[currentId].slideshow;
+                loadNext(current_slideshow)
+              }, $autoPlayMs);
+            };
           }
 
-          console.log(wallop_slideshows);
-          for (var slide_id in wallop_slideshows) {
-            var current_slideshow = wallop_slideshows[slide_id],
-              next_timeout_key = "next_timeout_" + slide_id,
-              loadNext = function (autoplay = false) {
-                var nextIndex = (current_slideshow.currentItemIndex + 1) % current_slideshow.allItemsArray.length;
-                slideshow.goTo(nextIndex);
-              };
-
-            if(window[next_timeout_key]) {
-              continue;
-            }
-            window[next_timeout_key] = setTimeout(function () {
-              loadNext(true);
-            }, $autoPlayMs);
-          
-            var el_id = '#' + slide_id;
+          for (var slideshow_id in wallop_slideshows) {
+            var current_slideshow = wallop_slideshows[slideshow_id].slideshow;
+            var el_id = '#' + slideshow_id;
             console.log(el_id);
             // Wallop specific settings.
             $(el_id).on('change', function () {
-              if(window[next_timeout_key]) {
-                clearTimeout(window[next_timeout_key]);
-              }
-              window[next_timeout_key] = nextTimeout = setTimeout(function () {
-                loadNext();
-              }, $autoPlayMs);
+              clearTimeout(wallop_slideshows[slideshow_id].nextTimeout);
+              wallop_slideshows[slideshow_id].nextTimeout(slideshow_id);
             });
             $(el_id).on('mouseenter', function () {
-              if(window[next_timeout_key]) {
-                clearTimeout(window[next_timeout_key]);
-              }
+              clearTimeout(wallop_slideshows[slideshow_id].nextTimeout);
             });
             $(el_id).on('mouseleave', function () {
-              window[next_timeout_key] = setTimeout(function () {
-                loadNext(true);
-              }, autoPlayMs);
+              wallop_slideshows[slideshow_id].nextTimeout(slideshow_id);
             });
           }
         }
