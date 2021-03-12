@@ -8,6 +8,8 @@
  * hook_preprocess_HOOK() to and change this to do things like adding custom
  * animations.
  *
+ * @var $header - The Block header
+ *
  * @var $slideshow_id - an id for the slideshow calculated in
  * wallop_preprocess_wallop_slideshow().
  *
@@ -19,8 +21,10 @@
  * by wallop.
  */
 ?>
-<div id="<?php print $slideshow_id; ?>"
-     <?php print drupal_attributes($attributes_array) ?>>
+<div id="<?php print $slideshow_id; ?>" <?php print drupal_attributes($attributes_array) ?>>
+  <?php if ($header): ?>
+    <h4 class="block-title"><?php print $header; ?></h4>
+  <?php endif; ?>
   <div class="Wallop-list">
     <?php foreach($slides as $slide) : ?>
       <div class="<?php !isset($not_first)
@@ -36,17 +40,8 @@
       </div>
     <?php endforeach; ?>
   </div>
-  <?php if($show_controls) : ?>
+  <?php if(count($slides) > 1 && $show_controls) : ?>
     <span class="Wallop-buttonPrevious Wallop-control"></span>
     <span class="Wallop-buttonNext Wallop-control"></span>
   <?php endif; ?>
 </div>
-<script type="text/javascript">
-  (function() {
-    var settings = JSON.parse('<?php print drupal_json_encode($settings); ?>');
-    new Wallop(
-      document.querySelector('<?php print "#$slideshow_id" ?>'),
-      settings
-    );
-  })();
-</script>

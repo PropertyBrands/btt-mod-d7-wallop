@@ -8,8 +8,9 @@ function wallop_theme() {
   return array(
     'wallop_slideshow' => array(
       'template' => 'templates/wallop-slideshow',
-      'slideshow_id' => NULL,
       'variables' => array(
+        'slideshow_id' => NULL,
+        'header' => NULL,
         // An array of items - each of which will be a string or render array
         'slides' => array(),
         // Run through drupal_attributes().
@@ -30,13 +31,10 @@ function wallop_theme() {
           'hidePreviousClass' => 'Wallop-item--hidePrevious',
           'hideNextClass' => 'Wallop-item--hideNext',
           'carousel' => TRUE,
+          'autoPlayMs' => 4500,
         ),
         'show_controls' => TRUE,
-        // Path to animation CSS files. These will not be inlined as they
-        // are not "critical".
-        'animation' => array(
-          drupal_get_path('module', 'wallop') . '/css/wallop--fade.css',
-        ),
+        'animation' => 'fade',
       ),
     ),
   );
@@ -47,17 +45,20 @@ function wallop_theme() {
  * @param $variables
  */
 function wallop_preprocess_wallop_slideshow(&$variables) {
-  wallop_add_core_assets();
-
   if(empty($variables['slideshow_id'])) {
-    $variables['slideshow_id'] = drupal_html_id('wallop-slideshow');
+    $drupal_id = drupal_html_id('wallop-slideshow');
+    $variables['slideshow_id'] = $drupal_id;
   }
-
-  if(!empty($variables['animation'])) {
-    foreach($variables['animation'] as $css_file) {
-      drupal_add_css($css_file, array('type' => 'file'));
-    }
-  }
+  $instances = [
+    'instances' => [
+      $variables['slideshow_id'] => [
+        'settings' => $variables['settings']
+      ]
+    ]
+  ];
+  wallop_add_core_assets();
+  drupal_add_js(['wallop' => $instances], 'setting');
+  drupal_add_css(drupal_get_path('module', 'wallop') . '/css/wallop--' . $variables['animation'] . '.css');
 }
 
 /**
@@ -72,48 +73,11 @@ function wallop_add_core_assets() {
     return;
   }
 
-  $assets = wallop_read_core_assets();
-
-  drupal_alter('wallop_asset', $assets);
-
-  drupal_add_js($assets['js']['asset'], $assets['js']['args']);
-  drupal_add_css($assets['css']['asset'], $assets['css']['args']);
+  $base_path = drupal_get_path('module', 'wallop');
+  drupal_add_js($base_path . '/js/vendor/wallop.min.js');
+  drupal_add_js($base_path . '/js/wallop.js');
+  drupal_add_css($base_path . '/css/wallop.css');
 
   $added = TRUE;
 }
 
-/**
- * Wallop is a very very small library. Our choice is to directly inline its assets.
- * @return string
- * @throws \Exception
- */
-function wallop_read_core_assets() {
-  $js_path = drupal_realpath(drupal_get_path('module', 'wallop') . '/js/wallop.min.js');
-  $css_path = drupal_realpath(drupal_get_path('module', 'wallop') . '/css/wallop.css');
-
-  if(!file_exists($js_path) || !file_exists($css_path)) {
-    throw new Exception(t('The Wallop library is not present in the file system.'));
-  }
-
-  $return = array(
-    'js' => array(
-      'asset' => file_get_contents($js_path),
-      'path' => $js_path,
-      'args' => array(
-        'type' => 'inline',
-        'scope' => 'header',
-      ),
-    ),
-    'css' => array(
-      'asset' => file_get_contents($css_path),
-      'path' => $css_path,
-      'args' => array(
-        'type' => 'inline',
-        'weight' => -99999,
-        'group' => CSS_SYSTEM
-      ),
-    ),
-  );
-
-  return $return;
-}
