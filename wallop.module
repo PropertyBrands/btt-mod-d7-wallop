@@ -13,6 +13,7 @@ function wallop_theme() {
         'header' => NULL,
         // An array of items - each of which will be a string or render array
         'slides' => array(),
+        'shouldAutoPlay' => true,
         // Run through drupal_attributes().
         'attributes_array' => array(
           'class' => array(

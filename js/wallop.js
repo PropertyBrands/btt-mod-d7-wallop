@@ -15,6 +15,7 @@
               $slider_settings = settings.wallop.instances[id].settings,
               $slider,
               $slideshow,
+              $shouldAutoPlay = $slider_settings.shouldAutoPlay || true,
               $autoPlayMs = $slider_settings.autoPlayMs || 4500;
 
             $slider = document.querySelector($slider_id);
@@ -40,7 +41,7 @@
 
             if(autoplay) {
               setTimeout(function () {
-                loadNext(current_slideshow, true);
+                loadNext(current_slideshow, autoplay);
               }, $autoPlayMs);
             }
           };
@@ -50,7 +51,7 @@
           wallop_slideshows.forEach(function(current_slideshow) {
             // Auto-run without requiring user change or mouseenter/mouseleave.
             setTimeout(function () {
-              loadNext(current_slideshow, true);
+              loadNext(current_slideshow, $shouldAutoPlay);
             }, $autoPlayMs);
 
 
