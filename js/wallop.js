@@ -11,6 +11,8 @@
           var wallop_slideshows = [];
           for (var id in settings.wallop.instances) {
             // Slider element and settings from Drupal.
+            console.log(settings.wallop.instances);
+            console.log(id);
             var $slider_id = '#' + id,
               $slider_settings = settings.wallop.instances[id].settings,
               $slider,
@@ -62,7 +64,7 @@
                 clearTimeout(nextTimeout);
               }
               nextTimeout = setTimeout(function () {
-                loadNext(current_slideshow);
+                loadNext(current_slideshow, $shouldAutoPlay);
               }, $autoPlayMs);
             });
             el.on('mouseenter', function () {

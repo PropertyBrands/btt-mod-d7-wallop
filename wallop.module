@@ -13,7 +13,6 @@ function wallop_theme() {
         'header' => NULL,
         // An array of items - each of which will be a string or render array
         'slides' => array(),
-        'shouldAutoPlay' => true,
         // Run through drupal_attributes().
         'attributes_array' => array(
           'class' => array(
@@ -32,6 +31,7 @@ function wallop_theme() {
           'hidePreviousClass' => 'Wallop-item--hidePrevious',
           'hideNextClass' => 'Wallop-item--hideNext',
           'carousel' => TRUE,
+          'shouldAutoPlay' => true,
           'autoPlayMs' => 4500,
         ),
         'show_controls' => TRUE,
