@@ -63,7 +63,6 @@ function wallop_preprocess_wallop_slideshow(&$variables) {
   // before we set them up in our JS settings object.
   drupal_alter('wallop_slideshow_instances', $instances);
 
-  dd($instances);
   wallop_add_core_assets();
   drupal_add_js(['wallop' => $instances], 'setting');
   drupal_add_css(drupal_get_path('module', 'wallop') . '/css/wallop--' . $variables['animation'] . '.css');

@@ -21,8 +21,6 @@
       var autoPlayMs = current_slideshow.options.autoPlayMs;
       var shouldAutoPlay = current_slideshow.options.shouldAutoPlay;
 
-      console.log(current_slideshow);
-      console.log(shouldAutoPlay);
       if(current_slideshow && shouldAutoPlay) {
         // Auto-run without requiring user change or mouseenter/mouseleave.
         nextTimeout = setTimeout(function () {
@@ -37,7 +35,6 @@
       var el = $(document.querySelector(current_slideshow.id));
       // Wallop specific settings.
       el.on('change', function () {
-        console.log("Changed sliedshow" . current_slideshow.id);
         if(nextTimeout) {
           clearTimeout(nextTimeout);
         }
