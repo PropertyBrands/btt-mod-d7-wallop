@@ -71,8 +71,6 @@
               $slider_settings = settings.wallop.instances[id].settings,
               $slider,
               $slideshow;
-              // $shouldAutoPlay = $slider_settings.shouldAutoPlay,
-              // $autoPlayMs = $slider_settings.autoPlayMs || 4500;
 
             $slider = document.querySelector($slider_id);
 
