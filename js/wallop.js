@@ -63,6 +63,11 @@
       var autoPlayMs = current_slideshow.options.autoPlayMs;
       var shouldAutoPlay = current_slideshow.options.shouldAutoPlay;
 
+      current_slideshow.on('change', function () {
+        // When the slide changes, show any hidden wallop slides.
+        $(current_slideshow.allItemsArray[current_slideshow.currentItemIndex]).find('.wallop-hidden').removeClass('wallop-hidden').show();
+      });
+
       if(current_slideshow && shouldAutoPlay) {
         // Auto-run without requiring user change or mouseenter/mouseleave.
         nextTimeout = setTimeout(function () {
