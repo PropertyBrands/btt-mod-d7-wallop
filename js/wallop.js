@@ -3,8 +3,50 @@
   var nextTimeout;
 
   var loadNext = function (current_slideshow, autoplay) {
-    var nextIndex = (current_slideshow.currentItemIndex + 1) % current_slideshow.allItemsArray.length;
-    current_slideshow.goTo(nextIndex);
+    var nextIndex = (current_slideshow.currentItemIndex + 1) % current_slideshow.allItemsArray.length,
+      $hidden = $(current_slideshow.allItemsArray[nextIndex]).find('.wallop-hidden'),
+      $img;
+    if ($hidden.length) {
+      $img = $hidden.find('img');
+      if ($img.length) {
+        // If the next slide was flagged with wallop hidden, set image srcset
+        // and src from data attributes and show it before going to the next
+        // slide.
+        $img.each(function(index) {
+          var $elem = $(this),
+            srcset = $elem.attr('data-srcset'),
+            src = $elem.attr('data-src');
+          if (srcset) {
+            $elem.attr('srcset', srcset);
+          }
+
+          if (src) {
+            $elem.attr('src', src);
+          }
+
+          if (index === 0) {
+            $elem.one('load', function () {
+              // Don't go to the next slide until its first image has been loaded.
+              current_slideshow.goTo(nextIndex);
+            });
+          }
+
+          $elem.addClass('bto-lazy-loaded');
+        });
+
+        $hidden.removeClass('wallop-hidden');
+        $hidden.show();
+      }
+      else {
+        // No image found inside hidden slide, so just show next slide.
+        $hidden.show();
+        current_slideshow.goTo(nextIndex);
+      }
+    }
+    else {
+      // This slide wasn't flagged as a hidden slide, so just show it.
+      current_slideshow.goTo(nextIndex);
+    }
 
     // If this is an autoplay slideshow, then let's recursively load the next slide per the
     // autoplay settings.
@@ -31,7 +73,7 @@
         // If we don't need to set up autoplay for this slideshow, or it doesn't exist, then let's bail out.
         return;
       }
-      
+
       var el = $(document.querySelector(current_slideshow.id));
       // Wallop specific settings.
       el.on('change', function () {
