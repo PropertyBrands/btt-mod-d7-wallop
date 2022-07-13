@@ -2,6 +2,29 @@
 (function($){
   var nextTimeout;
 
+  function show_hidden_slides(elem) {
+    $(elem).find('.wallop-hidden').each(function () {
+      var $hidden = $(this);
+      $hidden.find('img').each(function (index) {
+        var $elem = $(this),
+          srcset = $elem.attr('data-srcset'),
+          src = $elem.attr('data-src');
+        if (srcset) {
+          $elem.attr('srcset', srcset);
+        }
+
+        if (src) {
+          $elem.attr('src', src);
+        }
+
+        $elem.addClass('bto-lazy-loaded');
+      });
+
+      $hidden.removeClass('wallop-hidden');
+      $hidden.show();
+    });
+  }
+
   var loadNext = function (current_slideshow, autoplay) {
     var nextIndex = (current_slideshow.currentItemIndex + 1) % current_slideshow.allItemsArray.length,
       $hidden = $(current_slideshow.allItemsArray[nextIndex]).find('.wallop-hidden'),
@@ -67,6 +90,12 @@
         // When the slide changes, show any hidden wallop slides.
         $(current_slideshow.allItemsArray[current_slideshow.currentItemIndex]).find('.wallop-hidden').removeClass('wallop-hidden').show();
       });
+
+      $(current_slideshow.$selector).click(function() {
+        show_hidden_slides(current_slideshow.$selector);
+      }).hover(function() {
+        show_hidden_slides(current_slideshow.$selector);
+      })
 
       if(current_slideshow && shouldAutoPlay) {
         // Auto-run without requiring user change or mouseenter/mouseleave.
