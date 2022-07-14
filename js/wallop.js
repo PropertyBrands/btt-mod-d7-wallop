@@ -18,6 +18,7 @@
         }
 
         $elem.addClass('bto-lazy-loaded');
+        $elem.removeClass('bto-lazy');
       });
 
       $hidden.removeClass('wallop-hidden');
@@ -55,6 +56,7 @@
           }
 
           $elem.addClass('bto-lazy-loaded');
+          $elem.removeClass('bto-lazy');
         });
 
         $hidden.removeClass('wallop-hidden');
