@@ -1,0 +1,98 @@
+/**
+ * Screen Size Resolution List:
+ *
+ * 20em: 320px;
+ * 30em: 480px;
+ * 48em: 768px;
+ * 70em: 1024px;
+ * 60em: 1120px;
+ * 115em: 1840px;
+ */
+
+$black: #000000;
+$white: #FFFFFF;
+$gray: #F4F4F4;
+
+.Wallop {
+  position: relative;
+
+  // slideshow list.
+  .Wallop-list {
+    position: relative;
+    overflow: hidden;
+
+    // slideshow item.
+    .Wallop-item {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+      }
+
+      &.Wallop-item--current {
+        visibility: visible;
+        position: relative;
+      }
+    }
+  }
+
+  // Buttons.
+  .Wallop-buttons {
+    .Wallop-buttonPrevious,
+    .Wallop-buttonNext {
+      position: absolute;
+      top: 50%;
+      z-index: 1000;
+      display: inline-block;
+      opacity: 0;
+      transition: all .25s;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transform: translateY(-50%);
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        background-color: $black;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px auto;
+      }
+    }
+
+    .Wallop-buttonPrevious {
+      left: 15px;
+
+      &:before {
+        background-image: url('../images/chevron-left-white.svg');
+      }
+    }
+
+    .Wallop-buttonNext {
+      right: 15px;
+
+      &:before {
+        background-image: url('../images/chevron-right-white.svg');
+      }
+    }
+  }
+
+  &:hover {
+    .Wallop-buttons {
+      .Wallop-buttonPrevious,
+      .Wallop-buttonNext {
+        opacity: 1;
+      }
+    }
+  }
+}

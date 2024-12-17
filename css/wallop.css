@@ -1,120 +1,62 @@
 /**
- * wallop.css
+ * Screen Size Resolution List:
  *
- * @fileoverview Default styles for wallop – recommended
- *
- * @author Pedro Duarte
- * @author http://pedroduarte.me/wallop
- */
-
-/*
-  This is the top-level selector
-
-  It should be relative positioned
-  to allow the children to be positioned absolutely
-  relative to this
+ * 20em: 320px;
+ * 30em: 480px;
+ * 48em: 768px;
+ * 70em: 1024px;
+ * 60em: 1120px;
+ * 115em: 1840px;
  */
 .Wallop {
-  position: relative;
-}
-
-/*
-  This element groups all the items, but not the buttons
-
-  It's a recommendation but it's very likely
-  you'll want to hide any overflow from the items
-  Especially when doing animations such as scale
- */
-.Wallop-list {
-  position: relative;
-  overflow: hidden;
-}
-
-/*
-  This is the item element
-
-  By default, they are all hidden and
-  positioned absolute
-  I recommend always having .Wallop-item--current
-  in your markup by default (probably on the first element)
- */
-.Wallop-item {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-
-.Wallop-item img {
-  width:100%;
-  max-width:100%;
-  height:auto;
-}
-
-/*
-  This is the current item element
-
-  All we do here, is make it visible again reset
-  the position to static. Could also be relative
- */
-.Wallop-list .Wallop-item--current {
-  visibility: visible;
-  position: relative;
-}
-
-/*
-  Custom control styles - this is Wallop drupal module specific.
- */
-.Wallop-control {
-  position:absolute;
-  top:50%;
-  z-index:1000;
-  display: inline-block;
-  opacity:0;
-  transition:all .25s;
-}
-
-.Wallop:hover .Wallop-control {
-  opacity:0.5;
-}
-
-.Wallop-control::before,
-.Wallop-control::after {
-  content:'';
-  position:absolute;
-  z-index:999;
-  display:block;
-}
-
-.Wallop-control::before {
-  left:-5px;
-  top:-5px;
-  width:35px;
-  height:35px;
-  background-color:black;
-  transform:rotate(45deg);
-}
-
-.Wallop-control::after {
-  border: solid #FFF;
-  border-width: 0 2px 2px 0;
-  padding: 8px;
-  z-index:1001;
-}
-
-
-.Wallop-control:hover {
-  border-color:rgba(100,100,100,1);
-  cursor:pointer;
-}
-
-.Wallop-buttonPrevious {
-  transform: rotate(135deg);
-  left:45px;
-}
-
-.Wallop-buttonNext {
-  right:45px;
-  transform: rotate(-45deg);
-}
+  position: relative; }
+  .Wallop .Wallop-list {
+    position: relative;
+    overflow: hidden; }
+    .Wallop .Wallop-list .Wallop-item {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%; }
+      .Wallop .Wallop-list .Wallop-item img {
+        width: 100%;
+        max-width: 100%;
+        height: auto; }
+      .Wallop .Wallop-list .Wallop-item.Wallop-item--current {
+        visibility: visible;
+        position: relative; }
+  .Wallop .Wallop-buttons .Wallop-buttonPrevious,
+  .Wallop .Wallop-buttons .Wallop-buttonNext {
+    position: absolute;
+    top: 50%;
+    z-index: 1000;
+    display: inline-block;
+    opacity: 0;
+    transition: all .25s;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transform: translateY(-50%); }
+    .Wallop .Wallop-buttons .Wallop-buttonPrevious:before,
+    .Wallop .Wallop-buttons .Wallop-buttonNext:before {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      background-color: #000000;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 16px auto; }
+  .Wallop .Wallop-buttons .Wallop-buttonPrevious {
+    left: 15px; }
+    .Wallop .Wallop-buttons .Wallop-buttonPrevious:before {
+      background-image: url("../images/chevron-left-white.svg"); }
+  .Wallop .Wallop-buttons .Wallop-buttonNext {
+    right: 15px; }
+    .Wallop .Wallop-buttons .Wallop-buttonNext:before {
+      background-image: url("../images/chevron-right-white.svg"); }
+  .Wallop:hover .Wallop-buttons .Wallop-buttonPrevious,
+  .Wallop:hover .Wallop-buttons .Wallop-buttonNext {
+    opacity: 1; }

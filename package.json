@@ -1,0 +1,28 @@
+{
+  "name": "bt_page_builder",
+  "version": "1.0.0",
+  "description": "Provides SCSS compilation functionality to the bt_page_builder submodule.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PropertyBrands/btt-mod-D7-page-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PropertyBrands/btt-mod-D7-page-builder/issues"
+  },
+  "homepage": "https://github.com/PropertyBrands/btt-mod-D7-page-builder",
+  "devDependencies": {
+    "autoprefixer": "^9.7.2",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^3.1.0"
+  }
+}
