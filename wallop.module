@@ -65,7 +65,7 @@ function wallop_preprocess_wallop_slideshow(&$variables) {
 
   wallop_add_core_assets();
   drupal_add_js(['wallop' => $instances], 'setting');
-  drupal_add_css(drupal_get_path('module', 'wallop') . '/css/wallop--' . $variables['animation'] . '.css');
+  drupal_add_css(drupal_get_path('module', 'wallop') . '/dist/css/wallop--' . $variables['animation'] . '.min.css');
 }
 
 /**
@@ -83,7 +83,7 @@ function wallop_add_core_assets() {
   $base_path = drupal_get_path('module', 'wallop');
   drupal_add_js($base_path . '/js/vendor/wallop.min.js');
   drupal_add_js($base_path . '/js/wallop.js');
-  drupal_add_css($base_path . '/css/wallop.css');
+  drupal_add_css($base_path . '/dist/css/wallop.min.css');
 
   $added = TRUE;
 }

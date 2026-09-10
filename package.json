@@ -1,28 +1,30 @@
 {
-  "name": "bt_page_builder",
+  "name": "wallop",
   "version": "1.0.0",
-  "description": "Provides SCSS compilation functionality to the bt_page_builder submodule.",
+  "description": "Provides SCSS compilation functionality to the wallop submodule.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PropertyBrands/btt-mod-D7-page-builder"
+    "url": "https://github.com/PropertyBrands/btt-mod-d7-wallop"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PropertyBrands/btt-mod-D7-page-builder/issues"
+    "url": "https://github.com/PropertyBrands/btt-mod-d7-wallop/issues"
   },
-  "homepage": "https://github.com/PropertyBrands/btt-mod-D7-page-builder",
+  "homepage": "https://github.com/PropertyBrands/btt-mod-d7-wallop",
   "devDependencies": {
     "autoprefixer": "^9.7.2",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.2",
+    "gulp-notify": "^5.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.2"
   }
 }

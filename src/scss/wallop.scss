@@ -16,28 +16,31 @@ $gray: #F4F4F4;
 .Wallop {
   position: relative;
 
-  // slideshow list.
-  .Wallop-list {
-    position: relative;
-    overflow: hidden;
-
-    // slideshow item.
-    .Wallop-item {
-      visibility: hidden;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-
-      img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-      }
-
-      &.Wallop-item--current {
-        visibility: visible;
+  .Wallop-wrapper {
+    .Wallop-body {
+      position: relative;
+      .Wallop-list {
         position: relative;
+        overflow: hidden;
+
+        .Wallop-item {
+          visibility: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+
+          img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+          }
+
+          &.Wallop-item--current {
+            visibility: visible;
+            position: relative;
+          }
+        }
       }
     }
   }
@@ -74,7 +77,7 @@ $gray: #F4F4F4;
       left: 15px;
 
       &:before {
-        background-image: url('../images/chevron-left-white.svg');
+        background-image: url('../../images/chevron-left-white.svg');
       }
     }
 
@@ -82,7 +85,7 @@ $gray: #F4F4F4;
       right: 15px;
 
       &:before {
-        background-image: url('../images/chevron-right-white.svg');
+        background-image: url('../../images/chevron-right-white.svg');
       }
     }
   }
